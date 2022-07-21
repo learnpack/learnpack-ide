@@ -1,7 +1,7 @@
 <script>
   import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
-  import {fullURL} from './lib/Utils.svelte'
+  import Counter from './components/Counter.svelte'
+  import {fullURL} from './components/Utils.svelte'
 </script>
 
 <main>
