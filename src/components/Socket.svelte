@@ -1,6 +1,5 @@
-<script>
+<script context="module">
 import { io } from 'socket.io-client';
-import { fullURL, getParams } from "./Utils.svelte";
 
 export const getStatus = function(status='initializing'){
     const good = () => {
@@ -41,70 +40,69 @@ export const isPending = (status) => (status) ? (['initializing', 'compiling', '
 
 const actions = ['build','prettify', 'test', 'run', 'input', 'open', 'preview', 'reset', 'reload', 'open_window'];
 
-export const socket = null;
+export const Socket = {
+    socket: null,
+    start: function(host, onDisconnect=null){
+        this.socket = io(host)
+        this.socket.connect();
+        this.socket.on('disconnect', ()=> onDisconnect && onDisconnect());
+    },
+    createScope: function(scopeName){
 
-export const start = (HTMLOListElement, onDisconnect=null) => {
-    let preConfig = getParams("config");
-    if (preConfig && preConfig !== "") preConfig = JSON.parse(atob(preConfig));
-
-    console.log("host", getParams("host"));
-    const host = preConfig
-        ? `${preConfig.address}:${preConfig.port}`
-        : process.env.HOST || getParams("host") || fullURL;
-    this.socket = io(host);
-    this.socket.on('disconnect', () => onDisconnect && onDisconnect());
-}
-
-export const createScope = (scopeName) => {
-    const scope = {
-        socket: this.socket,
-        name: scopeName,
-        previewWindow: null,
-        actionCallBacks: {
-            clean: function(data, s){
-                s.logs = [];
+        const scope = {
+            socket: this.socket,
+            name: scopeName,
+            previewWindow: null,
+            actionCallBacks: {
+                clean: function(data, s){
+                    s.logs = [];
+                },
             },
-        },
-        statusCallBacks: {},
-        updatedCallback: null,
-        status: {
-            code: 'conecting',
-            message: getStatus('conecting')
-        },
-        logs: [],
-        on: function(action, callBack){
-            this.actionCallBacks[action] = callBack;
-        },
-        onStatus: function(status, callBack){
-            this.statusCallBacks[status] = callBack;
-        },
-        openWindow: function(data){
-            this.emit('open_window', data);
-        },
-        emit: function(action, data){
-            if(actions.indexOf(action) < 0) throw new Error('Invalid action "'+action+'" for socket connection');
-            else this.socket.emit(this.name, { action, data });
-        },
-        whenUpdated: function(callBack){
-            this.updatedCallback = callBack;
-        }
-    };
-    
-    this.socket.on(scopeName, (data) => {
-    
-        if(data.logs) scope.logs = scope.logs.concat(data.logs);
-        if(data.status) scope.status = {
-            code: data.status,
-            message: (data.data) ? data.data.message || getStatus(data.status) : getStatus(data.status),
-            gif: data.data ? data.data.gif : null,
-            video: data.data ? data.data.video: null
+            statusCallBacks: {},
+            updatedCallback: null,
+            status: {
+                code: 'conecting',
+                message: getStatus('conecting')
+            },
+            logs: [],
+            on: function(action, callBack){
+                this.actionCallBacks[action] = callBack;
+            },
+            onStatus: function(status, callBack){
+                this.statusCallBacks[status] = callBack;
+            },
+            openWindow: function(data){
+                this.emit('open_window', data);
+            },
+            emit: function(action, data){
+                if(actions.indexOf(action) < 0) throw new Error('Invalid action "'+action+'" for socket connection');
+                else this.socket.emit(this.name, { action, data });
+            },
+            whenUpdated: function(callBack){
+                this.updatedCallback = callBack;
+            }
         };
-    
-        if(typeof scope.actionCallBacks[data.action] == 'function') scope.actionCallBacks[data.action](data, scope);
-        if(typeof scope.statusCallBacks[data.status] == 'function') scope.statusCallBacks[data.status](data, scope);
-        if(scope.updatedCallback) scope.updatedCallback(scope, data);
-    });
-    
-    return scope;
-}
+
+        this.socket.on(scopeName,  (data) => {
+
+            if(data.logs) scope.logs = scope.logs.concat(data.logs);
+            if(data.status) scope.status = {
+                code: data.status,
+                message: (data.data) ? data.data.message || getStatus(data.status) : getStatus(data.status),
+                gif: data.data ? data.data.gif : null,
+                video: data.data ? data.data.video: null
+            };
+
+            if(typeof scope.actionCallBacks[data.action] == 'function') scope.actionCallBacks[data.action](data, scope);
+            if(typeof scope.statusCallBacks[data.status] == 'function') scope.statusCallBacks[data.status](data, scope);
+            if(scope.updatedCallback) {
+                console.log(`${scopeName} event: ${data}`) 
+                scope.updatedCallback(scope, data);
+            }
+        });
+
+        return scope;
+    }
+};
+
 </script>
