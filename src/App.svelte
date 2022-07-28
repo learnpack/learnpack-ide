@@ -1,13 +1,11 @@
 <script>
   import logo from './assets/svelte.png'
-  import Counter from './components/Counter.svelte'
+  import Navbar from './components/Navbar.svelte'
   import {fullURL} from './components/Utils.svelte'
 </script>
 
 <main>
-  <h1>Hello world!</h1>
-
-  <Counter />
+  <Navbar/>
 </main>
 
 <style>
