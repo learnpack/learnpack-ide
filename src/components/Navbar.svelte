@@ -1,5 +1,6 @@
 <script>
     export let exercises;
+    import Languages from "./Languages.svelte";
 
     function showExercises() {
         let navbar = document.getElementById("navbar");
@@ -22,18 +23,16 @@
     
 </div> -->
 
+<div>
+
 <nav>
          <div class="menu">
              <!-- svelte-ignore a11y-invalid-attribute -->
             <a href="#" on:click={showExercises}><img alt="menu" src="https://icongr.am/fontawesome/align-justify.svg?size=25&color=ffffff"></a>
          </div>
-         <div id="navbar">
-            {#each exercises as exercise}
-                <svelte:component this={exercise.component} {...exercise} />
-            {/each}
-        </div>
+         <div>
          <ul>
-            <!-- <li><a class="active" href="#">Language</a></li> -->
+            <!-- <li><a class="active" id="flag" href="#"><Languages/></a></li> -->
             <!-- svelte-ignore a11y-invalid-attribute -->
             <li><a href="#"><img alt="play" src="https://icongr.am/fontawesome/play-circle-o.svg?size=30&color=ffffff"></a></li>
             <!-- svelte-ignore a11y-invalid-attribute -->
@@ -43,9 +42,22 @@
             <!-- svelte-ignore a11y-invalid-attribute -->
             <li><a href="#"><img alt="right arrow" src="https://icongr.am/fontawesome/arrow-right.svg?size=30&color=ffffff"></a></li>
          </ul>
+         <div id="navbar">
+          {#each exercises as exercise}
+              <svelte:component this={exercise.component} {...exercise} />
+          {/each}
+      </div>
+        </div>
       </nav>
 
+      
+
+
+    </div>
+
 <style>
+
+
 
 *{
   margin: 0;
@@ -53,6 +65,11 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 } 
+
+#flag{
+    font-size: 2rem;
+}
+
 nav{
   display: flex;
   height: 80px;
@@ -86,7 +103,7 @@ nav ul li a{
   letter-spacing: 1px;
   transition: all 0.3s ease;
 }
-/* nav ul li a.active, */
+nav ul li a.active,
 nav ul li a:hover{
   color: black;
   
@@ -133,7 +150,6 @@ nav ul li a:hover{
     color: cyan;
   }
 }
-
 
     #navbar {
         display: none;
