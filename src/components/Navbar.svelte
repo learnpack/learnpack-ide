@@ -1,6 +1,9 @@
 <script>
+import { validate_component } from "svelte/internal";
+import showTheExercise from "./NavbarItem.svelte"
+import hideNavbar from "./NavbarItem.svelte"
+
   export let exercises;
-  import Languages from "./Languages.svelte";
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -13,6 +16,16 @@
       nav.style.height = "auto";
     }
   }
+
+
+
+
+//   function displayExercise() {
+//   document.getElementById("demo").innerHTML = "test";
+// }
+
+
+
 </script>
 
 <div>
@@ -51,12 +64,15 @@
         />
       </div>
     </div>
-    <div id="navbar">
+    <div id="navbar" >
       {#each exercises as exercise}
-        <svelte:component this={exercise.component} {...exercise} />
+        <svelte:component this={exercise.component} {...exercise}/>
       {/each}
     </div>
   </nav>
+
+<h1 id="theBody"></h1>
+
 </div>
 
 <style>
@@ -65,6 +81,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+
   }
 
   .row {
@@ -75,6 +92,7 @@
   .row .icon {
     width: 12%;
     padding: 2.5%;
+    cursor: pointer;
   }
 
   nav {
