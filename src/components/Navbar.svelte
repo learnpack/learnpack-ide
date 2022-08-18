@@ -1,7 +1,6 @@
 <script>
 import { validate_component } from "svelte/internal";
-import showTheExercise from "./NavbarItem.svelte"
-import hideNavbar from "./NavbarItem.svelte"
+
 
   export let exercises;
 
@@ -16,14 +15,6 @@ import hideNavbar from "./NavbarItem.svelte"
       nav.style.height = "auto";
     }
   }
-
-
-
-
-//   function displayExercise() {
-//   document.getElementById("demo").innerHTML = "test";
-// }
-
 
 
 </script>
@@ -71,7 +62,6 @@ import hideNavbar from "./NavbarItem.svelte"
     </div>
   </nav>
 
-<h1 id="theBody"></h1>
 
 </div>
 
@@ -92,6 +82,10 @@ import hideNavbar from "./NavbarItem.svelte"
   .row .icon {
     width: 12%;
     padding: 2.5%;
+  
+  }
+
+  .row .icon img{
     cursor: pointer;
   }
 

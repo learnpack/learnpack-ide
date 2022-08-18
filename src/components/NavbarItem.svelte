@@ -1,16 +1,18 @@
 <script>
 import { validate_dynamic_element } from "svelte/internal";
+import {loadReadme} from "./Utils.svelte"
 
 export let value;
 
-export function showTheExercise(){
-    let theItem = document.getElementById("theBody").innerHTML = value;
-    console.log(theItem)
 
+async function showTheExercise(){
+    let readMe = await loadReadme(value)
+    console.log(readMe)
+    document.getElementById("theBody").innerHTML = readMe.body;
     }
 
-export function hideNavbar() {
-    let test = document.getElementById("nav");
+function hideNavbar() {
+    let test = document.getElementById("navbar");
     test.style.display = "none" 
      
   }
@@ -18,7 +20,10 @@ export function hideNavbar() {
 
 </script>
 
-<div id="navbar-item" on:click={showTheExercise}>
+<div id="navbar-item" on:click={() => {
+    showTheExercise()
+    hideNavbar()
+}}>
     {value}
 </div>
 

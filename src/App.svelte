@@ -11,6 +11,7 @@
     exercises: [],
     host: getHost(),
     compilerSocket: null,
+    language: "us"
   }
 
   let exercises = [];
@@ -44,6 +45,7 @@
 
 <main>
   <Navbar {exercises} />
+  <div id="theBody"></div>
 </main>
 
 <style>
