@@ -1,6 +1,15 @@
 <script>
-import { validate_component } from "svelte/internal";
-
+import { loop_guard, validate_component } from "svelte/internal";
+import {
+    getHost,
+    loadConfig,
+    showTheExercise,
+    hideElement,
+    showElement,
+    getIndex
+  } from "../components/Utils.svelte";
+  import { state } from "../components/Store.svelte";
+  
 
   export let exercises;
 
@@ -16,6 +25,24 @@ import { validate_component } from "svelte/internal";
     }
   }
 
+
+  export function next() {
+    const i = getIndex($state) + 1;
+    if ($state.exercises[i].slug) {
+      state.set({ ...$state, currentSlug: $state.exercises[i].slug });
+    }
+
+  }
+
+  export function previous() {
+    const i = getIndex($state) - 1;
+    if ($state.exercises[i].slug) {
+      state.set({ ...$state, currentSlug: $state.exercises[i].slug });
+    }
+   
+  }
+
+  
 
 </script>
 
@@ -42,15 +69,17 @@ import { validate_component } from "svelte/internal";
           src="https://icongr.am/fontawesome/graduation-cap.svg?size=30&color=ffffff"
         />
       </div>
-      <div class="icon">
+      <div class="icon" id="leftArrow">
         <img
+        on:click={previous}
           alt="left-arrow"
           src="https://icongr.am/fontawesome/arrow-left.svg?size=30&color=ffffff"
         />
       </div>
-      <div class="icon">
-        <img
-          alt="right arrow"
+      <div class="icon" id="rightArrow">
+        <img 
+          on:click={next}
+          alt="right-arrow"
           src="https://icongr.am/fontawesome/arrow-right.svg?size=30&color=ffffff"
         />
       </div>

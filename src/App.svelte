@@ -1,56 +1,71 @@
 <script>
-  import {Socket} from "./components/Socket.svelte";
-  import {getHost, loadConfig} from "./components/Utils.svelte";
-  import {onMount} from "svelte";
-
+  import { Socket } from "./components/Socket.svelte";
+  import {
+    getHost,
+    loadConfig,
+    showTheExercise,
+    getIndex,
+    hideElement,
+    showElement
+  } from "./components/Utils.svelte";
+  import { onMount } from "svelte";
   import Navbar from "./components/Navbar.svelte";
   import NavbarItem from "./components/NavbarItem.svelte";
-  
-  let state = {
-    config: {},
-    exercises: [],
-    host: getHost(),
-    compilerSocket: null,
-    language: "us"
-  }
+  import { state } from "./components/Store.svelte";
 
   let exercises = [];
 
   onMount(async () => {
-    state.config = await loadConfig();
-    state.exercises = state.config.exercises;
-    exercises = state.exercises.map(exercise => {
-      return {value: exercise.slug, component: NavbarItem}
+    $state.config = await loadConfig();
+    $state.exercises = $state.config.exercises;
+    exercises = $state.exercises.map((exercise) => {
+      return { value: exercise.slug, component: NavbarItem };
     });
-    console.log(exercises)
-    Socket.start(state.host, () => { // <-- On Disconnect Callback!
+    console.log(exercises);
+    Socket.start($state.host, () => {
+      // <-- On Disconnect Callback!
       const consoleStatus = {
         code: "internal-error",
         message: "It seems that the exercise engine is disconnected",
-        solution: "Run on your terminal the command: $ learnpack start"
-      }
+        solution: "Run on your terminal the command: $ learnpack start",
+      };
       return consoleStatus;
-    })
+    });
 
-    state.compilerSocket = Socket.createScope("compiler");
+    $state.compilerSocket = Socket.createScope("compiler");
 
-    state.compilerSocket.onStatus("compiler-success", (data) => {
-      console.log(data)
-    })
+    $state.compilerSocket.onStatus("compiler-success", (data) => {
+      console.log(data);
+    });
+  });
 
-    console.log(state)
-  })
+
+  $: {
+    showTheExercise($state.currentSlug);
+    const i = getIndex($state) + 1;
+    let rightArrow = document.getElementById("rightArrow")
+    let leftArrow = document.getElementById("leftArrow")
+    if(i === $state.exercises.length - 1) hideElement(rightArrow)
+    else showElement(rightArrow)
+    if(i === 1) hideElement(leftArrow)
+    else showElement(leftArrow)
+  }
+
+
+
+ 
+
 
 </script>
 
+<!-- svelte-ignore non-top-level-reactive-declaration -->
 <main>
   <Navbar {exercises} />
-  <div id="theBody"></div>
+  <div id="theBody" />
 </main>
 
 <style>
-
-  body{
+  body {
     margin: 0;
   }
   :root {

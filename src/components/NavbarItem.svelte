@@ -1,28 +1,24 @@
 <script>
 import { validate_dynamic_element } from "svelte/internal";
-import {loadReadme} from "./Utils.svelte"
+import {showTheExercise} from "./Utils.svelte"
+import {state} from "./Store.svelte"
 
 export let value;
 
-
-async function showTheExercise(){
-    let readMe = await loadReadme(value)
-    console.log(readMe)
-    document.getElementById("theBody").innerHTML = readMe.body;
-    }
-
-function hideNavbar() {
-    let test = document.getElementById("navbar");
-    test.style.display = "none" 
+// function hideNavbar() {
+//     let test = document.getElementById("navbar");
+//     test.style.display = "none" 
      
-  }
+//   }
+
 
 
 </script>
 
 <div id="navbar-item" on:click={() => {
-    showTheExercise()
-    hideNavbar()
+    state.set({...$state,currentSlug:value})
+    showTheExercise(value)
+    console.log(value)
 }}>
     {value}
 </div>
