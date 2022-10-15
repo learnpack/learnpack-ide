@@ -49,6 +49,8 @@ import {
 <div>
   <nav id="nav">
     <div class="row">
+      <div>
+      <div class="background-menu">
       <div class="menu">
         <!-- svelte-ignore a11y-invalid-attribute -->
         <img
@@ -57,10 +59,24 @@ import {
             src="https://icongr.am/fontawesome/align-justify.svg?size=25&color=ffffff"
           />
       </div>
-      <div class="icon">
+    </div>
+    </div>
+      <!-- <div class="icon">
         <img
           alt="play"
           src="https://icongr.am/fontawesome/play-circle-o.svg?size=30&color=ffffff"
+        />
+      </div> -->
+      <div class="icon">
+        <img
+          alt="bug"
+          src="https://icongr.am/fontawesome/bug.svg?size=30&color=6b6b6b"
+        />
+      </div>
+      <div class="icon">
+        <img
+          alt="question"
+          src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
         />
       </div>
       <div class="icon">
@@ -118,11 +134,20 @@ import {
     cursor: pointer;
   }
 
-  nav {
+  .background-menu{
     display: flex;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: #0097CD;
+    border-radius: 3px;
+  }
+
+  nav {
+    text-align: center;
     height: 80px;
     width: 100%;
-    background: #1b1b1b;
+    background: #F5F5F5;
     align-items: center;
     justify-content: space-between;
     padding: 0 50px 0 100px;
@@ -131,11 +156,12 @@ import {
   
   nav .menu {
     color: #fff;
-    font-size: 35px;
+    /* font-size: 35px; */
     font-weight: 600;
-    width: 50%;
+    /* width: 50%; */
     padding-left: 5%;
     padding: 2.5%;
+    margin: auto;
   }
   nav ul {
     display: flex;
