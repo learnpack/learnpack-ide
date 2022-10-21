@@ -21,13 +21,14 @@ export let value;
     console.log(value)
 }}>
     {value}
+    <hr>
 </div>
 
 
 
 <style>
     #navbar-item {
-        color: white;
+        color: black;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;

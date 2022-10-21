@@ -16,12 +16,16 @@ import {
   function showExercises() {
     let navbar = document.getElementById("navbar");
     let nav = document.getElementById("nav")
+    let list = document.getElementById("exerciseList")
     if (navbar.style.display === "block") {
       navbar.style.display = "none";
-      nav.style.height = "80px";
+      nav.style.height = "50px";
     } else {
       navbar.style.display = "block";
       nav.style.height = "auto";
+      list.style.backgroundColor = "#C7F3FD";
+      list.style.paddingLeft = "50px"
+      list.style.paddingTop = "100px"
     }
   }
 
@@ -46,13 +50,12 @@ import {
 
 </script>
 
-<div>
+<!-- <div>
   <nav id="nav">
     <div class="row">
       <div>
       <div class="background-menu">
       <div class="menu">
-        <!-- svelte-ignore a11y-invalid-attribute -->
         <img
             on:click={showExercises}
             alt="menu"
@@ -61,12 +64,11 @@ import {
       </div>
     </div>
     </div>
-      <!-- <div class="icon">
-        <img
-          alt="play"
-          src="https://icongr.am/fontawesome/play-circle-o.svg?size=30&color=ffffff"
-        />
-      </div> -->
+      <div class="icon">
+        <div class="languages">
+          <p>Eng</p>
+        </div>
+      </div> 
       <div class="icon">
         <img
           alt="bug"
@@ -79,38 +81,203 @@ import {
           src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
         />
       </div>
-      <div class="icon">
-        <img
-          alt="tutorial"
-          src="https://icongr.am/fontawesome/graduation-cap.svg?size=30&color=ffffff"
-        />
-      </div>
       <div class="icon" id="leftArrow">
-        <img
+        <div
         on:click={previous}
-          alt="left-arrow"
-          src="https://icongr.am/fontawesome/arrow-left.svg?size=30&color=ffffff"
-        />
+        >
+        <p>Previous</p>
+        </div>
       </div>
       <div class="icon" id="rightArrow">
-        <img 
-          on:click={next}
-          alt="right-arrow"
-          src="https://icongr.am/fontawesome/arrow-right.svg?size=30&color=ffffff"
-        />
-      </div>
-    </div>
+       
+        <div 
+        on:click={next}
+        >
+        <p>Next</p>
+        </div>
+        </div>
+
     <div id="navbar" >
       {#each exercises as exercise}
         <svelte:component this={exercise.component} {...exercise}/>
       {/each}
     </div>
+
+    </div>
   </nav>
 
 
+</div> -->
+
+
+
+<!-- sample nav -->
+
+<div id="nav">
+  <input type="checkbox" id="nav-check">
+  <div class="nav-header">
+    <div class="nav-title">
+      <div>
+      <img
+            on:click={showExercises}
+            alt="menu"
+            src="https://icongr.am/fontawesome/align-justify.svg?size=25&color=ffffff"
+          />
+    </div>
+  </div>
+    <!-- <div class="nav-title" id="theLanguage">
+      <p>Eng</p>
+    </div> -->
+    <div class="nav-title" id="theBug">
+      <img
+      alt="bug"
+      src="https://icongr.am/fontawesome/bug.svg?size=30&color=6b6b6b"
+    />
+    </div>
+    <div class="nav-title" id="theQuestion">
+      <img
+          alt="question"
+          src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
+        />
+    </div>
+  </div>
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+  
+  <div class="nav-links">
+    <div class="right-links" id="leftArrow" on:click={previous}>Previous</div>
+    <div class="right-links" id="rightArrow" on:click={next}>Next</div>
+  </div>
+  <div id="navbar" >
+    <div id="exerciseList">
+      <div class="theQuestion">
+        <div class="test">
+        <img
+            alt="question"
+            src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
+          />
+        </div>
+          <div class="test"><p>Help</p></div>
+      </div>
+      {#each exercises as exercise}
+      <svelte:component this={exercise.component} {...exercise}/>
+    {/each}
+  </div>
+  </div>
 </div>
 
+
 <style>
+
+  /* Sample nav style */
+
+  * {
+  box-sizing: border-box;
+}
+
+
+#nav {
+  height: 50px;
+  width: 100%;
+  background-color: #F5F5F5;
+  position: relative;
+}
+
+
+#nav > .nav-header {
+  display: inline;
+}
+
+#nav > .nav-header > .nav-title {
+  display: inline-block;
+  float: left;
+  font-size: 0px;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
+}
+
+#nav > .nav-btn {
+  display: none;
+}
+
+#nav > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+#nav > .nav-links > .right-links {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: 6b6b6b;
+}
+
+#nav > .nav-links > .right-links:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.theQuestion{
+  display: flex;
+}
+
+#nav > #nav-check {
+  display: none;
+}
+#navbar {
+    display: none;
+  }
+@media (max-width:600px) {
+  #nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  #nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  #nav > .nav-btn > label:hover,#nav  #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  #nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  #nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  #nav > .nav-links > .right-links {
+    display: block;
+    width: 100%;
+  }
+  #nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+  #nav > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+}
+/* 
   * {
     margin: 0;
     padding: 0;
@@ -118,10 +285,26 @@ import {
     font-family: "Poppins", sans-serif;
 
   }
+  .languages{
+    border-color: #6b6b6b;
+    border-style: solid;
+    border-radius: 3px;
+  }
+
+  #rightArrow{
+    position: absolute;
+    right: 0px;
+  }
+
+  #leftArrow{
+    position: absolute;
+    right: 115px;
+  }
 
   .row {
     display: flex;
     width: 100%;
+    position: relative;
   }
 
   .row .icon {
@@ -156,9 +339,7 @@ import {
   
   nav .menu {
     color: #fff;
-    /* font-size: 35px; */
     font-weight: 600;
-    /* width: 50%; */
     padding-left: 5%;
     padding: 2.5%;
     margin: auto;
@@ -230,5 +411,10 @@ import {
 
   #navbar {
     display: none;
-  }
+  } */
+
+
+
+
+  
 </style>
