@@ -5,11 +5,13 @@ import {state} from "./Store.svelte"
 
 export let value;
 
-// function hideNavbar() {
-//     let test = document.getElementById("navbar");
-//     test.style.display = "none" 
-     
-//   }
+// function itemClicked() {
+//     let navbarItem = document.getElementById("navbar-item");
+
+//     if(navbarItem.style.display === "block"){
+
+//     }
+// }
 
 
 
@@ -21,18 +23,25 @@ export let value;
     console.log(value)
 }}>
     {value}
-    <hr>
 </div>
+
+<span class="line"></span>
 
 
 
 <style>
+
+.line {
+  display: inline-block;
+  width:60%;
+  border-top: 1px solid #0097CD;
+}
     #navbar-item {
         color: black;
         padding: 14px 16px;
-        text-decoration: none;
         font-size: 17px;
         display: block;
+        font-weight: bold;
     }
 
     #navbar-item:hover {

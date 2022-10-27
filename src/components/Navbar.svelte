@@ -19,16 +19,17 @@ import {
     let list = document.getElementById("exerciseList")
     if (navbar.style.display === "block") {
       navbar.style.display = "none";
-      nav.style.height = "50px";
+      nav.style.height = "85px";
     } else {
       navbar.style.display = "block";
-      nav.style.height = "auto";
       list.style.backgroundColor = "#C7F3FD";
       list.style.paddingLeft = "50px"
-      list.style.paddingTop = "100px"
+      list.style.paddingTop = "50px"
     }
-  }
 
+
+  }
+  
 
   export function next() {
     const i = getIndex($state) + 1;
@@ -46,185 +47,241 @@ import {
    
   }
 
+
+
   
 
 </script>
-
-<!-- <div>
-  <nav id="nav">
-    <div class="row">
-      <div>
-      <div class="background-menu">
-      <div class="menu">
-        <img
-            on:click={showExercises}
-            alt="menu"
-            src="https://icongr.am/fontawesome/align-justify.svg?size=25&color=ffffff"
-          />
-      </div>
-    </div>
-    </div>
-      <div class="icon">
-        <div class="languages">
-          <p>Eng</p>
-        </div>
-      </div> 
-      <div class="icon">
-        <img
-          alt="bug"
-          src="https://icongr.am/fontawesome/bug.svg?size=30&color=6b6b6b"
-        />
-      </div>
-      <div class="icon">
-        <img
-          alt="question"
-          src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
-        />
-      </div>
-      <div class="icon" id="leftArrow">
-        <div
-        on:click={previous}
-        >
-        <p>Previous</p>
-        </div>
-      </div>
-      <div class="icon" id="rightArrow">
-       
-        <div 
-        on:click={next}
-        >
-        <p>Next</p>
-        </div>
-        </div>
-
-    <div id="navbar" >
-      {#each exercises as exercise}
-        <svelte:component this={exercise.component} {...exercise}/>
-      {/each}
-    </div>
-
-    </div>
-  </nav>
-
-
-</div> -->
-
-
-
-<!-- sample nav -->
-
 <div id="nav">
   <input type="checkbox" id="nav-check">
   <div class="nav-header">
     <div class="nav-title">
-      <div>
+      <div id="menu-background">
       <img
             on:click={showExercises}
             alt="menu"
-            src="https://icongr.am/fontawesome/align-justify.svg?size=25&color=ffffff"
+            src="https://icongr.am/fontawesome/align-justify.svg?size=30&color=ffffff"
           />
     </div>
   </div>
-    <!-- <div class="nav-title" id="theLanguage">
-      <p>Eng</p>
-    </div> -->
-    <div class="nav-title" id="theBug">
+  <div class="nav-title" id="dropdown">
+    <button class="dropbtn">Eng</button>
+    <div class="dropdown-content">
+      <a href="">Esp</a>
+      <a href="">Ita</a>
+    </div>
+  </div>
+    <div class="nav-title">
       <img
+      id="theBug"
       alt="bug"
       src="https://icongr.am/fontawesome/bug.svg?size=30&color=6b6b6b"
     />
     </div>
-    <div class="nav-title" id="theQuestion">
+    <div class="nav-title">
       <img
+          id="theQuestion"
           alt="question"
           src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
         />
     </div>
   </div>
-  <div class="nav-btn">
-    <label for="nav-check">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
-  </div>
-  
   <div class="nav-links">
-    <div class="right-links" id="leftArrow" on:click={previous}>Previous</div>
-    <div class="right-links" id="rightArrow" on:click={next}>Next</div>
-  </div>
-  <div id="navbar" >
-    <div id="exerciseList">
-      <div class="theQuestion">
-        <div class="test">
-        <img
-            alt="question"
-            src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
-          />
+        <div class="container" id="left-container" on:click={previous}>
+          <div class="image">
+            <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=40&color=currentColor">
+          </div>
+          <div class="text" id="left-text">
+            <p>Previous</p>
+          </div>
         </div>
-          <div class="test"><p>Help</p></div>
+   
+
+      <div class="container"id="right-container" on:click={next}>
+        <div class="text" id="right-text">
+          <p>Next</p>
+        </div>
+        <div class="image">
+          <img alt="arrow" src="https://icongr.am/feather/arrow-right.svg?size=40&color=currentColor">
+        </div>
       </div>
-      {#each exercises as exercise}
-      <svelte:component this={exercise.component} {...exercise}/>
-    {/each}
-  </div>
-  </div>
+  
+      
 </div>
+</div>
+
+<div id="navbar">
+<div id="exerciseList" > 
+  <div class="container-question" id="question">
+    <div class="image">
+      <img
+            alt="question"
+            src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
+          />
+    </div>
+    <div class="text" id="help-text">
+      <p>Help</p>
+    </div>
+  </div>
+  {#each exercises as exercise}
+  <svelte:component this={exercise.component} {...exercise}/>
+{/each}
+</div>
+</div>
+
+
 
 
 <style>
 
-  /* Sample nav style */
+
+#exerciseList{
+  background-color: #C7F3FD;
+  padding-left:50px;
+}
+
+#help-text{
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+  .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 3px;
+  border-color: #A4A4A4;
+}
+
+.container-question{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 3rem;
+}
+
+#left-container{
+  margin-right: 18px;
+}
+
+.image {
+  flex-basis: 5%
+}
+
+#left-text, #right-text{
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 18px;
+}
+
+.dropbtn {
+  color: #606060;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  width: 50px;
+  height: 40px;
+  border-style: solid;
+}
+
+#dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #606060;
+  min-width: 50px;
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: #606060;
+  text-decoration: none;
+  background-color: #C4C4C4;
+  display: block;
+  text-align: center;
+  padding: 5px 0px 5px 0px;
+}
+
+.dropdown-content a:hover {
+  background-color: #606060;
+  color: white;
+}
+
+#dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+#dropdown:hover .dropbtn {
+  background-color: #606060;
+  color: white;
+}
+
 
   * {
   box-sizing: border-box;
 }
 
+:global(body){
+  margin: 0;
+}
 
-#nav {
-  height: 50px;
-  width: 100%;
-  background-color: #F5F5F5;
-  position: relative;
+#nav > .nav-header{
+  background-color: white;
+  margin-left: 18px;
 }
 
 
-#nav > .nav-header {
-  display: inline;
+#nav {
+  height: 85px;
+  width: 100%;
+  background-color: #F5F5F5;
+  padding: 12px 12px 12px 12px;
 }
 
 #nav > .nav-header > .nav-title {
-  display: inline-block;
   float: left;
-  font-size: 0px;
+  font-size: 15px;
   color: #fff;
   padding: 10px 10px 10px 10px;
 }
 
-#nav > .nav-btn {
-  display: none;
+#menu-background{
+  background-color: #0097CD;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  padding: 6px;
+  border-radius: 3px;
 }
+
+#theBug, #theQuestion{
+  padding-top: 6px;
+}
+
 
 #nav > .nav-links {
-  display: inline;
   float: right;
   font-size: 18px;
-}
-
-#nav > .nav-links > .right-links {
-  display: inline-block;
-  padding: 13px 10px 13px 10px;
-  text-decoration: none;
-  color: 6b6b6b;
-}
-
-#nav > .nav-links > .right-links:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.theQuestion{
   display: flex;
+  justify-content: center;
+  margin-right: 40px;
+  padding-top: 6px;
 }
+
 
 #nav > #nav-check {
   display: none;
@@ -232,28 +289,9 @@ import {
 #navbar {
     display: none;
   }
+
+
 @media (max-width:600px) {
-  #nav > .nav-btn {
-    display: inline-block;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-  }
-  #nav > .nav-btn > label {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    padding: 13px;
-  }
-  #nav > .nav-btn > label:hover,#nav  #nav-check:checked ~ .nav-btn > label {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  #nav > .nav-btn > label > span {
-    display: block;
-    width: 25px;
-    height: 10px;
-    border-top: 2px solid #eee;
-  }
   #nav > .nav-links {
     position: absolute;
     display: block;
@@ -265,10 +303,6 @@ import {
     top: 50px;
     left: 0px;
   }
-  #nav > .nav-links > .right-links {
-    display: block;
-    width: 100%;
-  }
   #nav > #nav-check:not(:checked) ~ .nav-links {
     height: 0px;
   }
@@ -277,144 +311,5 @@ import {
     overflow-y: auto;
   }
 }
-/* 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 
-  }
-  .languages{
-    border-color: #6b6b6b;
-    border-style: solid;
-    border-radius: 3px;
-  }
-
-  #rightArrow{
-    position: absolute;
-    right: 0px;
-  }
-
-  #leftArrow{
-    position: absolute;
-    right: 115px;
-  }
-
-  .row {
-    display: flex;
-    width: 100%;
-    position: relative;
-  }
-
-  .row .icon {
-    width: 12%;
-    padding: 2.5%;
-  
-  }
-
-  .row .icon img{
-    cursor: pointer;
-  }
-
-  .background-menu{
-    display: flex;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    background: #0097CD;
-    border-radius: 3px;
-  }
-
-  nav {
-    text-align: center;
-    height: 80px;
-    width: 100%;
-    background: #F5F5F5;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px 0 100px;
-    flex-wrap: wrap;
-  }
-  
-  nav .menu {
-    color: #fff;
-    font-weight: 600;
-    padding-left: 5%;
-    padding: 2.5%;
-    margin: auto;
-  }
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-  }
-  nav ul li {
-    margin: 0 5px;
-  }
-  nav ul li a {
-    color: #f2f2f2;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 15px;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-  }
-  nav ul li a.active,
-  nav ul li a:hover {
-    color: black;
-  }
-
-  @media (max-width: 1000px) {
-    nav {
-      padding: 0 40px 0 50px;
-    }
-  }
-  @media (max-width: 920px) {
-    nav .menu-btn i {
-      display: block;
-    }
-
-    nav ul {
-      position: fixed;
-      top: 80px;
-      left: -100%;
-      background: #111;
-      height: 100vh;
-      width: 100%;
-      text-align: center;
-      display: block;
-      transition: all 0.3s ease;
-    }
-    nav ul li {
-      width: 100%;
-      margin: 40px 0;
-    }
-    nav ul li a {
-      width: 100%;
-      margin-left: -100%;
-      display: block;
-      font-size: 20px;
-      transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    #click:checked ~ ul li a {
-      margin-left: 0px;
-    }
-    nav ul li a.active,
-    nav ul li a:hover {
-      background: none;
-      color: cyan;
-    }
-  }
-
-  #navbar {
-    display: none;
-  } */
-
-
-
-
-  
 </style>

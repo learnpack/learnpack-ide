@@ -43,8 +43,8 @@
   $: {
     showTheExercise($state.currentSlug);
     const i = getIndex($state) + 1;
-    let rightArrow = document.getElementById("rightArrow")
-    let leftArrow = document.getElementById("leftArrow")
+    let rightArrow = document.getElementById("right-container")
+    let leftArrow = document.getElementById("left-container")
     if(i === $state.exercises.length - 1) hideElement(rightArrow)
     else showElement(rightArrow)
     if(i === 1) hideElement(leftArrow)
