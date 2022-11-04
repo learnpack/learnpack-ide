@@ -8,6 +8,7 @@ export const state = writable(
     exercises: [],
     host: getHost(),
     load: loadReadme(),
+    questions: [],
     currentSlug: "",
     compilerSocket: null,
     language: "us",

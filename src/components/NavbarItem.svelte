@@ -5,13 +5,11 @@ import {state} from "./Store.svelte"
 
 export let value;
 
-// function itemClicked() {
-//     let navbarItem = document.getElementById("navbar-item");
+function itemClicked() {
+    let navbar = document.getElementById("navbar")
 
-//     if(navbarItem.style.display === "block"){
-
-//     }
-// }
+    navbar.style.display = "none";
+}
 
 
 
@@ -20,6 +18,7 @@ export let value;
 <div id="navbar-item" on:click={() => {
     state.set({...$state,currentSlug:value})
     showTheExercise(value)
+    itemClicked();
     console.log(value)
 }}>
     {value}
