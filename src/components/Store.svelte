@@ -9,6 +9,7 @@ export const state = writable(
     host: getHost(),
     load: loadReadme(),
     questions: [],
+    currentQuestionSlug: "",
     currentSlug: "",
     compilerSocket: null,
     language: "us",

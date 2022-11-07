@@ -10,15 +10,19 @@
   } from "./components/Utils.svelte";
   import { onMount } from "svelte";
   import Navbar from "./components/Navbar.svelte";
+  import Help from "./components/Help.svelte";
   import NavbarItem from "./components/NavbarItem.svelte";
   import { state } from "./components/Store.svelte";
 
   let exercises = [];
+  let questions = [];
+
 
 
   onMount(async () => {
     $state.config = await loadConfig();
     $state.exercises = $state.config.exercises;
+    console.log($state.exercises)
     exercises = $state.exercises.map((exercise) => {
       return { value: exercise.slug, component: NavbarItem };
     });
@@ -39,6 +43,15 @@
       console.log(data);
     });
   });
+
+  onMount(async () => {
+		const res = await fetch('https://learnpack.herokuapp.com/v1/support/question');
+		$state.questions = await res.json();
+		questions = $state.questions.map((question) => {
+			return {value: question.slug}
+		});
+        console.log(questions)
+	});
 
 
   $: {
@@ -61,7 +74,7 @@
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
 <main>
-  <Navbar {exercises} />
+  <Navbar {exercises} {questions}/>
   <div id="theBody" />
 </main>
 

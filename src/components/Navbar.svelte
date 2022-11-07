@@ -8,10 +8,15 @@ import {
     showElement,
     getIndex
   } from "../components/Utils.svelte";
+  import Help from "./Help.svelte";
   import { state } from "../components/Store.svelte";
-  
+  import Modal from './Modal.svelte';
+  let showModal = false;
+
+
 
   export let exercises;
+  export let questions;
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -46,7 +51,6 @@ import {
     }
    
   }
-
 
 
   
@@ -112,7 +116,7 @@ import {
 
 <div id="navbar">
 <div id="exerciseList" > 
-  <div class="container-question" id="question" >
+  <div class="container-question" id="question" on:click="{() => showModal = true}">
     <div class="image">
       <img
             alt="question"
@@ -123,6 +127,18 @@ import {
       <p>Help</p>
     </div>
   </div>
+
+
+{#if showModal}
+	<Modal on:close="{() => showModal = false}">
+		<h2 slot="header">
+			Frequently Asked Questions
+	{#each questions as question}
+  <svelte:component this={question.component} {...question}/>
+{/each}
+		</h2>
+	</Modal>
+{/if}
   {#each exercises as exercise}
   <svelte:component this={exercise.component} {...exercise}/>
 {/each}
@@ -130,21 +146,27 @@ import {
 </div>
 
 
-
-
 <style>
-
-
-#exerciseList{
-  background-color: #C7F3FD;
-  padding-left:50px;
-}
 
 #help-text{
   padding-right: 20px;
   padding-left: 20px;
   font-size: 18px;
   font-weight: bold;
+}
+
+.container-question{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 3rem;
+}
+
+
+#exerciseList{
+  background-color: #C7F3FD;
+  padding-left:50px;
 }
 
   .container {
@@ -158,13 +180,6 @@ import {
   border-color: #A4A4A4;
 }
 
-.container-question{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 3rem;
-}
 
 #left-container{
   margin-right: 18px;
