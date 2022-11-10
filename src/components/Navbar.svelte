@@ -8,15 +8,13 @@ import {
     showElement,
     getIndex
   } from "../components/Utils.svelte";
-  import Help from "./Help.svelte";
   import { state } from "../components/Store.svelte";
-  import Modal from './Modal.svelte';
-  let showModal = false;
 
 
 
   export let exercises;
-  export let questions;
+
+  console.log($state.questions)
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -114,9 +112,24 @@ import {
 </div>
 </div>
 
+<div class="available-actions-section">
+  <div class="actions">
+    <img class="active-actions" src="https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b"/>
+    <img class="active-actions" src="https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b"/>
+    <img class="active-actions" src="https://icongr.am/clarity/refresh.svg?size=27&color=6b6b6b"/>
+    <img class="active-actions" src="https://icongr.am/entypo/youtube.svg?size=27&color=6b6b6b"/>
+  </div>
+
+  <div class="ready-wrapper">
+  <div  id= "ready" >
+    <p id="ready-text">Ready...</p>
+  </div>
+  </div>
+</div>
+
 <div id="navbar">
 <div id="exerciseList" > 
-  <div class="container-question" id="question" on:click="{() => showModal = true}">
+  <div class="container-question" id="question">
     <div class="image">
       <img
             alt="question"
@@ -127,18 +140,6 @@ import {
       <p>Help</p>
     </div>
   </div>
-
-
-{#if showModal}
-	<Modal on:close="{() => showModal = false}">
-		<h2 slot="header">
-			Frequently Asked Questions
-	{#each questions as question}
-  <svelte:component this={question.component} {...question}/>
-{/each}
-		</h2>
-	</Modal>
-{/if}
   {#each exercises as exercise}
   <svelte:component this={exercise.component} {...exercise}/>
 {/each}
@@ -265,6 +266,41 @@ import {
   width: 100%;
   background-color: #F5F5F5;
   padding: 12px 12px 12px 12px;
+}
+
+.available-actions-section{
+  background-color: #C7F3FD;
+  padding: 12px 12px 12px 40px;
+  display: flex;
+}
+
+.active-actions{
+  margin-top: 0;
+  padding: 8px;;
+}
+
+.actions{
+  border: solid #0097CD;
+  padding: 12px 12px 12px 12px;
+  border-radius: 5px;
+}
+
+.ready-wrapper{
+  background-color: #0097CD;
+  margin: auto 20px;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+;
+}
+
+#ready{
+  color: white;
+  padding: 5px;
+}
+
+#ready-text{
+  margin: 0;
 }
 
 #nav > .nav-header > .nav-title {
