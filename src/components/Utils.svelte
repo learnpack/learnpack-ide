@@ -14,6 +14,14 @@
             : getParams("host") || fullURL;
         return HOST;
     };
+    export async function showTheExercise(slug){
+    let readMe = await loadReadme(slug)
+    console.log(readMe)
+    document.getElementById("theBody").innerHTML = readMe.body;
+    }
+    
+
+    
 
     export const loadConfig = async function(){
         let response = await fetch(getHost() + '/config')
@@ -114,4 +122,21 @@
         }
         return acc;
     }
+
+    export function hideElement(element){
+    if(element) element.style.visibility = "hidden"
+    else console.log(`The element (${element}) does not exist`)
+  }
+
+  export function showElement(element){
+    if(element) element.style.visibility = "visible"
+    else console.log(`The element (${element}) does not exist`)
+  }
+
+  export function getIndex(state) {
+    for (let i = 0; i < state.exercises.length; i++) {
+      if (state.exercises[i].slug === state.currentSlug) return i;
+    }
+  }
+
 </script>

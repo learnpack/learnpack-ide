@@ -1,21 +1,49 @@
 <script>
-    export let value;
+import { validate_dynamic_element } from "svelte/internal";
+import {showTheExercise} from "./Utils.svelte"
+import {state} from "./Store.svelte"
+
+export let value;
+
+function itemClicked() {
+    let navbar = document.getElementById("navbar")
+
+    navbar.style.display = "none";
+}
+
+
+
 </script>
 
-<div class="navbar-item">
+<div id="navbar-item" on:click={() => {
+    state.set({...$state,currentSlug:value})
+    showTheExercise(value)
+    itemClicked();
+    console.log(value)
+}}>
     {value}
 </div>
 
+<span class="line"></span>
+
+
+
 <style>
-    .navbar-item {
-        color: white;
+
+.line {
+  display: inline-block;
+  width:60%;
+  border-top: 1px solid #0097CD;
+}
+    #navbar-item {
+        color: black;
         padding: 14px 16px;
-        text-decoration: none;
         font-size: 17px;
         display: block;
+        font-weight: bold;
     }
 
-    .navbar-item:hover {
+    #navbar-item:hover {
         background-color: #ddd;
         color: black;
     }
