@@ -12,31 +12,65 @@
 
 import { onMount } from "svelte";
 import { state } from "./Store.svelte";
-import loading from "public/loading.gif"
+import QuestionListItem from "./QuestionListItem.svelte"
 
-let loadingImage = {loading}
+let questions = [];
 
 
 onMount(async () => {
-		const res = await fetch('https://learnpack.herokuapp.com/v1/support/question');
-        if(res.status === 200){
+        try {
+            const res = await fetch('https://learnpack.herokuapp.com/v1/support/question');
             $state.questions = await res.json();
-            return $state.questions
-        } else{
-            return loadingImage;
-        }    
-        //create a validation just in case $state.questions doesn't exist. If it doesn't exist include a loading icon
+            questions = $state.questions.map((question) => {
+        return { value: question.title, component: QuestionListItem };
+    });
+        } catch(err){
+            console.log("There was an error loading the questions", err)
+        }  
 	});
+
+
+
+$:{
+        console.log($state.questions)
+    }
+
 
 
 </script>
 
-<div id="question-item">
+<div class="back-nav">
+    <div class="back-container">
+    <div class="image">
+        <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=40&color=currentColor">
+      </div>
+    <div class="back-button">
+        <p>back</p>
+    </div>
+    <p>Frequently Asked Questions</p>
+</div>
+</div>
 
+<div id="question-item">
+    {#each questions as question}
+  <svelte:component this={question.component} {...question}/>
+{/each}
 </div>
 
 
+
 <style>
+
+.back-container{
+  align-items: center;
+  display: flex;
+  height: 85px;
+  width: 100%;
+  background-color: #F5F5F5;
+  padding: 12px 12px 12px 12px;
+}
+
+
 
 
 </style>

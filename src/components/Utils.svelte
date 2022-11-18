@@ -21,8 +21,6 @@
     }
     
 
-    
-
     export const loadConfig = async function(){
         let response = await fetch(getHost() + '/config')
         let config = await response.json();

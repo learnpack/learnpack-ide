@@ -19,7 +19,6 @@ function itemClicked() {
     state.set({...$state,currentSlug:value})
     showTheExercise(value)
     itemClicked();
-    console.log(value)
 }}>
     {value}
 </div>
