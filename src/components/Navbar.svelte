@@ -1,6 +1,6 @@
 <script>
 import { loop_guard, validate_component } from "svelte/internal";
-import {Link, Route, Router } from "/Users/karlacuevas/Documents/learnpack-ide/node_modules/svelte-navigator"
+import {Link, Route, Router} from "/Users/karlacuevas/Documents/learnpack-ide/node_modules/svelte-navigator"
 // import Router, {location, link} from 'svelte-spa-router';
 import HelpPage from "./HelpPage.svelte";
 import {
@@ -14,12 +14,7 @@ import {
   import { state } from "../components/Store.svelte";
 
 
-
   export let exercises;
-
-  let routes = {
-    "help": HelpPage
-  }
 
 
 
@@ -50,11 +45,14 @@ import {
   }
   
 
-  function hide(){
+  function hideNavbar(){
     let theContainer = document.getElementById("question")
-    let navbar = document.getElementById("navbar");
+    let nav = document.getElementById("nav");
+    let navbar = document.getElementById("navbar")
 
     theContainer.style.display= "none"
+    nav.style.display = "none"
+    navbar.style.display = "none"
   
   }
   
@@ -77,6 +75,7 @@ import {
 
 
 </script>
+<Router>
 <div id="nav">
   <input type="checkbox" id="nav-check">
   <div class="nav-header">
@@ -104,11 +103,13 @@ import {
     />
     </div>
     <div class="nav-title">
+      <Link to="help" on:click={hideNavbar}>
       <img
           id="theQuestion"
           alt="question"
           src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
         />
+      </Link>
     </div>
   </div>
   <div class="nav-links">
@@ -135,7 +136,7 @@ import {
 </div>
 </div>
 
-<div class="available-actions-section">
+<!-- <div class="available-actions-section">
   <div class="actions">
     <img class="active-actions" src="https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b"/>
     <img class="active-actions" src="https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b"/>
@@ -148,13 +149,14 @@ import {
     <p id="ready-text">Ready...</p>
   </div>
   </div>
-</div>
+</div> -->
+
+
 
 <div id="navbar">
 <div id="exerciseList" >
-
-  <!-- <Router>
-    <Link to="help" on:click={hide}>
+  
+    <Link to="help" on:click={hideNavbar}>
       <div class="container-question" id="question">
         <div class="image">
           <img
@@ -167,70 +169,16 @@ import {
         </div>
       </div>
     </Link>
-
-<Route path="help" primary={true}>
-  <HelpPage/>
-</Route>
-
-</Router> -->
-
   {#each exercises as exercise}
   <svelte:component this={exercise.component} {...exercise}/>
 {/each}
 </div>
+
 </div>
-
-
-<Router>
-    <Link to="help" on:click={hide}>
-      <div class="container-question" id="question">
-        <div class="image">
-          <img
-                alt="question"
-                src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
-              />
-        </div>
-        <div class="text" id="help-text">
-          <p>Help</p>
-        </div>
-      </div>
-    </Link>
-
 <Route path="help" primary={true}>
   <HelpPage/>
 </Route>
-
 </Router>
-
-
-<!-- 
-  <a href="/#/help">
-    <div class="container-question" id="question">
-      <div class="image">
-        <img
-              alt="question"
-              src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
-            />
-      </div>
-      <div class="text" id="help-text">
-        <p>Help</p>
-      </div>
-    </div>
-  </a>
-
-  <Router routes={{
-    '/help': HelpPage,
-  }} />
-  
-  <hr>
-  {$location} -->
-
-
-
-
-
-
-
 
 
 <style>

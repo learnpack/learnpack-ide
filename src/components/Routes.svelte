@@ -1,23 +1,17 @@
 <!-- <script>
-import HelpPage from "./HelpPage.svelte";
-import Navbar from "./Navbar.svelte";
-import {Router, Link, Route} from "/Users/karlacuevas/Documents/learnpack-ide/node_modules/svelte-navigator"
-
-
-
-
-let routes = {
-    "/": Navbar,
-    "/help": HelpPage
-}
-
-
-
-
-
-
-
+	import Router, {location, link} from 'svelte-spa-router';
+    import HelpPage from './HelpPage.svelte';
+	import Navbar from "./Navbar.svelte";
 </script>
 
 
-<Router {routes}></Router> -->
+
+
+
+<Router routes={{
+	'/': Navbar,
+	'/help': HelpPage,
+}} />
+
+<hr>
+/#{$location} -->

@@ -19,7 +19,6 @@
     console.log(readMe)
     document.getElementById("theBody").innerHTML = readMe.body;
     }
-    
 
     export const loadConfig = async function(){
         let response = await fetch(getHost() + '/config')
@@ -42,6 +41,9 @@
                 .catch((error) => reject(error))
         );
     };
+
+
+
 
     export const loadReadme = function (exerciseSlug, language = "us") {
         return new Promise((resolve, reject) =>

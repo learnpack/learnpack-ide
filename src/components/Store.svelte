@@ -13,7 +13,7 @@ export const state = writable(
     intro: null,
     introOpen: true,
     questions: [],
-    currentQuestionSlug: "",
+    currentQuestionSlug: null,
     currentSlug: "",
     compilerSocket: null,
     language: "us",

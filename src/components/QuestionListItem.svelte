@@ -1,14 +1,31 @@
 <script>
-    import { validate_dynamic_element } from "svelte/internal";
-    import {showTheExercise} from "./Utils.svelte"
+    import { onMount, validate_dynamic_element } from "svelte/internal";
     import {state} from "./Store.svelte"
     
     export let value;
+
+        onMount(async ({slug}) => {
+        try {
+            const res = await fetch(`https://learnpack.herokuapp.com/v1/support/question/${slug}`);
+            console.log(res)
+            $state.currentQuestionSlug = await res.json();
+            console.log($state.currentQuestionSlug)
+        } catch(err){
+            console.log("There was an error loading the questions", err)
+        }  
+	});
+
+
+$:{
+        console.log($state.currentQuestionSlug)
+    }
     
     
     </script>
     
-    <div id="navbar-item">
+    <div id="navbar-item" on:click={() => {
+        state.set({... $state,currentQuestionSlug:value})
+    }}>
         {value}
     </div>
 

@@ -12,8 +12,8 @@
   import Navbar from "./components/Navbar.svelte";
   import NavbarItem from "./components/NavbarItem.svelte";
   import { state } from "./components/Store.svelte";
-  import HelpPage from "./components/HelpPage.svelte";
   import {Router, Link, Route} from "/Users/karlacuevas/Documents/learnpack-ide/node_modules/svelte-navigator"
+  import Routes from "./components/Routes.svelte";
 
   let exercises = [];
 

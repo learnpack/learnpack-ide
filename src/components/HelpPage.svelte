@@ -39,15 +39,14 @@ $:{
 
 </script>
 
-<div class="back-nav">
-    <div class="back-container">
+<div id="back-nav">
+    <div id="back-container">
     <div class="image">
         <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=40&color=currentColor">
       </div>
-    <div class="back-button">
-        <p>back</p>
+    <div id="faq-text">
+        <p>Frequently Asked Questions</p>
     </div>
-    <p>Frequently Asked Questions</p>
 </div>
 </div>
 
@@ -61,16 +60,27 @@ $:{
 
 <style>
 
-.back-container{
-  align-items: center;
-  display: flex;
+#back-nav{
   height: 85px;
   width: 100%;
   background-color: #F5F5F5;
   padding: 12px 12px 12px 12px;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
 }
 
+#back-container{
+  display: flex;
+  float: left;
+  margin-right: 18px;
+  align-items: center;
+  justify-content: center;
+}
 
+#faq-text{
+    font-size: 18px;
+    margin-left: 3rem;
+}
 
 
 </style>
