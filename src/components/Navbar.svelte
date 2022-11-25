@@ -1,5 +1,6 @@
 <script>
 import { loop_guard, validate_component } from "svelte/internal";
+import { onMount, afterUpdate } from "svelte";
 import {
     getHost,
     loadConfig,
@@ -15,6 +16,7 @@ import {
   export let exercises;
 
   console.log($state.questions)
+  console.log("State: ",$state);
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -31,6 +33,20 @@ import {
     }
 
 
+  }
+
+  afterUpdate(()=>{
+      let bugIcon = document.getElementById("theBug")
+
+      if($state.config.config && !$state.config.config.bugsLink) {
+        // hide parent element if no bugsLink is available 
+        bugIcon.parentElement.style.display = "none"
+      }
+  })
+
+
+  function navigateToBugReportPage(){
+    $state.config.config.bugsLink && window.open(`${$state.config.config.bugsLink}?assignees=&labels=&projects=learnpack/1&title=Excercise%20Bug:%20${$state.currentSlug}&body=Describe the bug:%0D%0A%0D%0A**1.%20Exercise%20Name:**%20${$state.currentSlug}%0D%0A%0D%0A**2.%20Repository%20URL:**%20${$state.config.config.repository}`, "_blank")
   }
   
 
@@ -73,7 +89,7 @@ import {
       <a href="">Ita</a>
     </div>
   </div>
-    <div class="nav-title">
+    <div class="nav-title" on:click={navigateToBugReportPage}>
       <img
       id="theBug"
       alt="bug"
