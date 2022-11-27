@@ -45,16 +45,16 @@ import {
   }
   
 
-  function hideNavbar(){
-    let theContainer = document.getElementById("question")
-    let nav = document.getElementById("nav");
-    let navbar = document.getElementById("navbar")
+  // function hideNavbar(){
+  //   let theContainer = document.getElementById("question")
+  //   let nav = document.getElementById("nav");
+  //   let navbar = document.getElementById("navbar")
 
-    theContainer.style.display= "none"
-    nav.style.display = "none"
-    navbar.style.display = "none"
+  //   theContainer.style.display= "none"
+  //   nav.style.display = "none"
+  //   navbar.style.display = "none"
   
-  }
+  // }
   
 
   export function next() {
@@ -103,7 +103,7 @@ import {
     />
     </div>
     <div class="nav-title">
-      <Link to="help" on:click={hideNavbar}>
+      <Link to="/help">
       <img
           id="theQuestion"
           alt="question"
@@ -156,7 +156,7 @@ import {
 <div id="navbar">
 <div id="exerciseList" >
   
-    <Link to="help" on:click={hideNavbar}>
+    <Link to="/help" >
       <div class="container-question" id="question">
         <div class="image">
           <img
@@ -175,7 +175,7 @@ import {
 </div>
 
 </div>
-<Route path="help" primary={true}>
+<Route path="/help" primary={true}>
   <HelpPage/>
 </Route>
 </Router>
