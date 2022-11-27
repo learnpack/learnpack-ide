@@ -1,5 +1,8 @@
 <script>
 import { loop_guard, validate_component } from "svelte/internal";
+import {Link, Route, Router} from "/Users/karlacuevas/Documents/learnpack-ide/node_modules/svelte-navigator"
+// import Router, {location, link} from 'svelte-spa-router';
+import HelpPage from "./HelpPage.svelte";
 import {
     getHost,
     loadConfig,
@@ -11,10 +14,18 @@ import {
   import { state } from "../components/Store.svelte";
 
 
-
   export let exercises;
 
-  console.log($state.questions)
+
+
+  const actions = [
+    { slug: 'build', label: 'Build', icon: "https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b" },
+    { slug: 'run', label: 'Compile', icon: 'fas fa-play' },
+    { slug: 'preview', label: 'Preview', icon: "https://icongr.am/entypo/youtube.svg?size=27&color=6b6b6b" },
+    { slug: 'pretty', label: 'Pretty', icon: 'fas fa-paint-brush' },
+    { slug: 'test', label: 'Test', icon: "https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b" },
+    { slug: 'reset', label: 'Reset', icon: "https://icongr.am/clarity/refresh.svg?size=27&color=6b6b6b", confirm: true, refresh: true }
+];
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -34,6 +45,18 @@ import {
   }
   
 
+  // function hideNavbar(){
+  //   let theContainer = document.getElementById("question")
+  //   let nav = document.getElementById("nav");
+  //   let navbar = document.getElementById("navbar")
+
+  //   theContainer.style.display= "none"
+  //   nav.style.display = "none"
+  //   navbar.style.display = "none"
+  
+  // }
+  
+
   export function next() {
     const i = getIndex($state) + 1;
     if ($state.exercises[i].slug) {
@@ -51,9 +74,8 @@ import {
   }
 
 
-  
-
 </script>
+<Router>
 <div id="nav">
   <input type="checkbox" id="nav-check">
   <div class="nav-header">
@@ -81,11 +103,13 @@ import {
     />
     </div>
     <div class="nav-title">
+      <Link to="/help">
       <img
           id="theQuestion"
           alt="question"
           src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
         />
+      </Link>
     </div>
   </div>
   <div class="nav-links">
@@ -112,7 +136,7 @@ import {
 </div>
 </div>
 
-<div class="available-actions-section">
+<!-- <div class="available-actions-section">
   <div class="actions">
     <img class="active-actions" src="https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b"/>
     <img class="active-actions" src="https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b"/>
@@ -125,26 +149,36 @@ import {
     <p id="ready-text">Ready...</p>
   </div>
   </div>
-</div>
+</div> -->
+
+
 
 <div id="navbar">
-<div id="exerciseList" > 
-  <div class="container-question" id="question">
-    <div class="image">
-      <img
-            alt="question"
-            src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
-          />
-    </div>
-    <div class="text" id="help-text">
-      <p>Help</p>
-    </div>
-  </div>
+<div id="exerciseList" >
+  
+    <Link to="/help" >
+      <div class="container-question" id="question">
+        <div class="image">
+          <img
+                alt="question"
+                src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
+              />
+        </div>
+        <div class="text" id="help-text">
+          <p>Help</p>
+        </div>
+      </div>
+    </Link>
   {#each exercises as exercise}
   <svelte:component this={exercise.component} {...exercise}/>
 {/each}
 </div>
+
 </div>
+<Route path="/help" primary={true}>
+  <HelpPage/>
+</Route>
+</Router>
 
 
 <style>
@@ -272,6 +306,7 @@ import {
   background-color: #C7F3FD;
   padding: 12px 12px 12px 40px;
   display: flex;
+  height: 85px;
 }
 
 .active-actions{
