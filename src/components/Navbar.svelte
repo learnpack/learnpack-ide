@@ -11,12 +11,7 @@ import {
   } from "../components/Utils.svelte";
   import { state } from "../components/Store.svelte";
 
-
-
   export let exercises;
-
-  console.log($state.questions)
-  console.log("State: ",$state);
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -336,6 +331,7 @@ import {
   font-size: 15px;
   color: #fff;
   padding: 10px 10px 10px 10px;
+  cursor: pointer;
 }
 
 #menu-background{
