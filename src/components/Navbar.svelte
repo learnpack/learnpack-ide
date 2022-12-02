@@ -44,9 +44,21 @@ import {
       }
   })
 
+  // checks if the url has a slash in the end and removes it
+  function removeEndSlash(url){
+    let lastIndex = url.length - 1
+
+    if(url[lastIndex] == '/'){
+      // return the url without the / in the end 
+      return url.slice(0, -1)
+    }else{
+      return url
+    }
+  }
 
   function navigateToBugReportPage(){
-    $state.config.config.bugsLink && window.open(`${$state.config.config.bugsLink}?assignees=&labels=&projects=learnpack/1&title=Excercise%20Bug:%20${$state.currentSlug}&body=Describe the bug:%0D%0A%0D%0A**1.%20Exercise%20Name:**%20${$state.currentSlug}%0D%0A%0D%0A**2.%20Repository%20URL:**%20${$state.config.config.repository}`, "_blank")
+
+    $state.config.config.bugsLink && window.open(`${removeEndSlash($state.config.config.bugsLink)}?assignees=&labels=&projects=learnpack/1&title=Excercise%20Bug:%20${$state.currentSlug}&body=Describe the bug:%0D%0A%0D%0A**1.%20Exercise%20Name:**%20${$state.currentSlug}%0D%0A%0D%0A**2.%20Repository%20URL:**%20${$state.config.config.repository}`, "_blank")
   }
   
 
