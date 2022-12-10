@@ -1,4 +1,6 @@
 <script context="module">
+    import { onMount, validate_dynamic_element } from "svelte/internal";
+
     export const fullURL =
         location.protocol +
         "//" +
@@ -43,8 +45,6 @@
     };
 
 
-
-
     export const loadReadme = function (exerciseSlug, language = "us") {
         return new Promise((resolve, reject) =>
             fetch(
@@ -70,6 +70,7 @@
                 .catch((error) => reject(error))
         );
     };
+
 
     export const saveFile = function (exerciseSlug, file, content) {
         return new Promise((resolve, reject) =>

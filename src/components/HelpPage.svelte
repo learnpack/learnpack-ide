@@ -2,6 +2,7 @@
 import { onMount } from "svelte";
 import { state } from "./Store.svelte";
 import QuestionListItem from "./QuestionListItem.svelte"
+    import { Link } from "svelte-navigator";
 
 let questions = [];
 
@@ -11,7 +12,7 @@ onMount(async () => {
             const res = await fetch('https://learnpack.herokuapp.com/v1/support/question');
             $state.questions = await res.json();
             questions = $state.questions.map((question) => {
-        return { value: question.title, component: QuestionListItem };
+        return { value: question.title, slug: question.slug, answer: question.answer, component: QuestionListItem };
     });
         } catch(err){
             console.log("There was an error loading the questions", err)
@@ -31,7 +32,7 @@ $:{
 <div id="back-nav">
     <div id="back-container">
     <div class="image">
-        <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=40&color=currentColor">
+        <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=41&color=currentColor">
       </div>
     <div id="faq-text">
         <p>Frequently Asked Questions</p>
@@ -39,11 +40,15 @@ $:{
 </div>
 </div>
 
+
 <div id="question-item">
     {#each questions as question}
+    <a href={`/help/${question.slug}`}>
   <svelte:component this={question.component} {...question}/>
+    </a>
 {/each}
 </div>
+
 
 
 

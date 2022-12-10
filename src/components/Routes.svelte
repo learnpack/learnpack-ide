@@ -11,11 +11,13 @@
   import { onMount } from "svelte";
   import NavbarItem from "./NavbarItem.svelte";
   import { state } from "./Store.svelte";
-  import { Router, Route, Link } from "svelte-navigator";
+  import { Router, Route } from "svelte-navigator";
   import HelpPage from './HelpPage.svelte';
   import Navbar from "./Navbar.svelte";
+  import Question from "./Question.svelte"
 
   let exercises = [];
+
 
 
 
@@ -65,4 +67,7 @@
 	  <Route path="/help">
 		<HelpPage/>
 	  </Route>
+    <Route path="help/:questionSlug" >
+      <Question />
+    </Route>
   </Router>

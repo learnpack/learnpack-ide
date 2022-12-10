@@ -18,14 +18,14 @@ import {
 
 
 
-  const actions = [
-    { slug: 'build', label: 'Build', icon: "https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b" },
-    { slug: 'run', label: 'Compile', icon: 'fas fa-play' },
-    { slug: 'preview', label: 'Preview', icon: "https://icongr.am/entypo/youtube.svg?size=27&color=6b6b6b" },
-    { slug: 'pretty', label: 'Pretty', icon: 'fas fa-paint-brush' },
-    { slug: 'test', label: 'Test', icon: "https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b" },
-    { slug: 'reset', label: 'Reset', icon: "https://icongr.am/clarity/refresh.svg?size=27&color=6b6b6b", confirm: true, refresh: true }
-];
+//   const actions = [
+//     { slug: 'build', label: 'Build', icon: "https://icongr.am/feather/play-circle.svg?size=27&color=6b6b6b" },
+//     { slug: 'run', label: 'Compile', icon: 'fas fa-play' },
+//     { slug: 'preview', label: 'Preview', icon: "https://icongr.am/entypo/youtube.svg?size=27&color=6b6b6b" },
+//     { slug: 'pretty', label: 'Pretty', icon: 'fas fa-paint-brush' },
+//     { slug: 'test', label: 'Test', icon: "https://icongr.am/clarity/checkbox-list.svg?size=27&color=6b6b6b" },
+//     { slug: 'reset', label: 'Reset', icon: "https://icongr.am/clarity/refresh.svg?size=27&color=6b6b6b", confirm: true, refresh: true }
+// ];
 
   function showExercises() {
     let navbar = document.getElementById("navbar");
@@ -84,7 +84,7 @@ import {
       <img
             on:click={showExercises}
             alt="menu"
-            src="https://icongr.am/fontawesome/align-justify.svg?size=30&color=ffffff"
+            src="https://icongr.am/fontawesome/align-justify.svg?size=31&color=ffffff"
           />
     </div>
   </div>
@@ -99,7 +99,7 @@ import {
       <img
       id="theBug"
       alt="bug"
-      src="https://icongr.am/fontawesome/bug.svg?size=30&color=6b6b6b"
+      src="https://icongr.am/fontawesome/bug.svg?size=31&color=6b6b6b"
     />
     </div>
     <div class="nav-title">
@@ -107,7 +107,7 @@ import {
       <img
           id="theQuestion"
           alt="question"
-          src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=6b6b6b"
+          src="https://icongr.am/fontawesome/question-circle-o.svg?size=31&color=6b6b6b"
         />
       </Link>
     </div>
@@ -115,7 +115,7 @@ import {
   <div class="nav-links">
         <div class="container" id="left-container" on:click={previous}>
           <div class="image">
-            <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=40&color=currentColor">
+            <img alt="arrow" src="https://icongr.am/feather/arrow-left.svg?size=41&color=currentColor">
           </div>
           <div class="text" id="left-text">
             <p>Previous</p>
@@ -128,7 +128,7 @@ import {
           <p>Next</p>
         </div>
         <div class="image">
-          <img alt="arrow" src="https://icongr.am/feather/arrow-right.svg?size=40&color=currentColor">
+          <img alt="arrow" src="https://icongr.am/feather/arrow-right.svg?size=41&color=currentColor">
         </div>
       </div>
   
@@ -161,7 +161,7 @@ import {
         <div class="image">
           <img
                 alt="question"
-                src="https://icongr.am/fontawesome/question-circle-o.svg?size=30&color=000000"
+                src="https://icongr.am/fontawesome/question-circle-o.svg?size=31&color=000000"
               />
         </div>
         <div class="text" id="help-text">

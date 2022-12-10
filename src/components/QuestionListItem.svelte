@@ -1,25 +1,28 @@
 <script>
-    import { onMount, validate_dynamic_element } from "svelte/internal";
+    import { Link } from "svelte-navigator";
+import { onMount, validate_dynamic_element } from "svelte/internal";
     import {state} from "./Store.svelte"
     
     export let value;
 
-        onMount(async ({slug}) => {
-        try {
-            const res = await fetch(`https://learnpack.herokuapp.com/v1/support/question/${slug}`);
-            console.log(res)
-            $state.currentQuestionSlug = await res.json();
-            console.log($state.currentQuestionSlug)
-        } catch(err){
-            console.log("There was an error loading the questions", err)
-        }  
-	});
+ 
 
+    //     onMount(async () => {
+    //     try {
+    //     //     for (let i = 0; i < $state.questions.length; i++) {
+    //     // if ($state.questions[i].title === $state.currentQuestionSlug) return i;
+    //     // }
+    //         const res = await fetch(`https://learnpack.herokuapp.com/v1/support/question/`);
+    //         q = await res.json();
+    //     } catch(err){
+    //         console.log("There was an error loading the questions", err)
+    //     }  
+	// });
 
 $:{
         console.log($state.currentQuestionSlug)
     }
-    
+
     
     </script>
     

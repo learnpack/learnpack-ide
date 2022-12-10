@@ -1,11 +1,15 @@
 <script>
   import Routes from "./components/Routes.svelte";
+  
+
+let questions = []
 
 
 
 </script>
 <main>
   <Routes/>
+
   <div id="theBody" />
 </main>
 
